@@ -1,0 +1,149 @@
+---
+title: "Pengaruh Subsidi Terhadap Pembelian Mobil Listrik Pada Tahun 2023"
+subtitle: "Metode Penelitian Politeknik APP Jakarta"
+author: "Dini Ardiyanti"
+date: 2024-01-10
+number-sections: true
+format:
+  html: default
+  docx: default
+editor: visual
+---
+
+![](poltekapp.jpg)
+
+## Pendahuluan
+
+### Latar belakang
+
+Dengan meningkatnya kesadaran akan efek negatif gas rumah kaca terhadap perubahan iklim dan keterbatasan sumber daya energi fosil, banyak negara telah beralih ke solusi transportasi yang lebih berkelanjutan. Mendorong pembeliaan kendaraan listrik, yang dianggap lebih ramah lingkungan dan berkontribusi pada pengurangan emisi karbon, merupakan langkah strategis. Studi ini akan melacak tingkat keberhasilan subsidi mobil listrik yang diberikan oleh pemerintah di Indonesia per tanggal 1 April 2023. Tujuan dari penelitian ini adalah untuk mengidentifikasi dampak positif yang diharapkan dari program ini, serta bagaimana program ini sejalan dengan tujuan keberlanjutan, inovasi teknologi, dan perbaikan kualitas lingkungan.
+
+### Ruang lingkup
+
+Ruang lingkup pembahasan pada penelitian ini sesuai dengan variabel yang akan dianalisis yaitu jumlah pembelian mobil listrik pada tahun 2023. Batasan masalah akan berperan dalam membantu mengidentifikasi masalah yang akan dibahas serta membatasi jangkauan proses yang akan dibahas.
+
+### Rumusan masalah
+
+1\. Mengidentifikasi keberhasilan subsidi yang diberikan pemerintah apakah berdampak besar untuk meningkatkan angka pembelian mobil listrik
+
+### Tujuan dan manfaat penelitian
+
+Tujuan penelitian ini untuk mengetahui pengaruh subsidi yang diberikan pemerintah terhadap minat beli masyarakat terhadap mobil listrik.
+
+### Package
+
+Ini tidak wajib ada di packages yang digunakan antara lain sebagai berikut:
+
+```{r}
+#| warning: false
+#| echo: true
+library("tidyverse")
+library("readxl")
+library("dplyr")
+```
+
+## Studi pustaka
+
+Menurut Mark Gartner, Penulis \"*Electric Vehicle Technology Explained*\": \"Kendaraan listrik adalah kendaraan yang menggunakan motor listrik sebagai penggerak utama, dengan energi penyimpanan yang dapat diisi ulang, seperti baterai atau sel bahan bakar.\"
+
+## Metode penelitian
+
+### Data
+
+Data yang digunakan berupa data akumulasi penjualan Hyundai Ioniq sepanjang tahun 2023 (Januari-November) dari Gabungan Industri Kendaraan Bermotor Indonesia (Gaikindo) dan data subsidi yang diberikan pemerintah per 1 April 2023 yang diatur dalam Peraturan Menteri Keuangan (PMK) Nomor 38 Tahun 2023 berupa diskon Pajak Pertambahan Nilai (PPN).
+
+| Bulan     | TP  |
+|-----------|-----|
+| Januari   | 234 |
+| Februari  | 214 |
+| Maret     | 592 |
+| April     | 716 |
+| Mei       | 919 |
+| Juni      | 870 |
+| Juli      | 369 |
+| Agustus   | 557 |
+| September | 865 |
+| Oktober   | 832 |
+| November  | 779 |
+
+| Bulan     | S           |
+|-----------|-------------|
+| Januari   | 0           |
+| Februari  | 0           |
+| Maret     | 0           |
+| April     | 177.777.777 |
+| Mei       | 177.777.777 |
+| Juni      | 177.777.777 |
+| Juli      | 177.777.777 |
+| Agustus   | 177.777.777 |
+| September | 177.777.777 |
+| Oktober   | 177.777.777 |
+| November  | 177.777.777 |
+
+![](gaikindo.jpg)
+
+Logo Gaikindo
+
+Penelitian ini menggunakan data penjualan wholesale battery electric vehicle Hyundai Ioniq tahun 2023 dari Gabungan Industri Kendaraan Bermotor Indonesia (Gaikindo).
+
+Baca data
+
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel('dat.xlsx')
+head(dat)
+```
+
+```{r}
+library("ggplot2")
+library("readxl")
+library("dplyr")
+ggplot(data=dat,aes(x=TP,y=S))+
+  geom_point(color="blue",size=2)+
+  labs(title="tabel 1.Hubungan antara Pembelian Mobil Listrik dan Subsidi",
+      x="Pembelian Mobil Listrik",
+      y="Subsidi",
+      caption = "sumber : Badan Pusat Statistik")+
+   theme_classic()
+```
+
+### Metode analisis
+
+Metode yang dipilih adalah regresi univariat atau Ordinary Least Square (OLS) dengan 1 variabel independen. Penelitian ini merbaksud mencari hubungan antara Subsidi (S) dan Pembelian Mobil Listrik (TP). Spesifikasi yang dilakukan adalah:
+
+$$
+y_{t}=\beta_0 + \beta_1 x_t+\mu_t
+$$ di mana $y_t$ adalah TP dan $x_t$ adalah S.
+
+## Pembahasan
+
+### Pembahasan masalah
+
+Dikarenakan peneliti menggunakan OLS, maka fokus yang akan dibahas hanya menghubungkan Pembelian Mobil Listrik dan Subsidi. Data tersebut disatukan sehingga menampilkan regresi seperti ini.
+
+```{r}
+#import dataset
+library(readxl)
+dat<-read_excel('dat.xlsx')
+head(dat)
+```
+
+### Analisis masalah
+
+Hasil regresinya adalah
+
+```{r}
+reg1<-lm(TP~S,data=dat)
+summary(reg1)
+```
+
+## Kesimpulan
+
+Berdasarkan regresi yang telah dilakukan, dapat dilihat bahwa setiap kenaikan subsidi sebesar 1, maka tingkat penjualan akan naik 2,203. Dari hasil regresi tersebut dapat dipastikan subsidi yang diberikan oleh pemerintah per tanggal 1 April 2023 mampu menaikkan minat beli masyarakat terhadap mobil listrik.
+
+## Referensi
+
+Redaksi, T. (2023) Anies Kritik, Berapa Uang Negara Habis subsidi Mobil Listrik?, CNBC Indonesia. Available at: https://www.cnbcindonesia.com/news/20230510154423-4-436224/anies-kritik-berapa-uang-negara-habis-subsidi-mobil-listrik (Accessed: 10 January 2024).
+
+Gabungan Industri Kendaraan Bermotor Indonesia. (n.d.). Retrieved January 10, 2024, from https://www.gaikindo.or.id /indonesian-automobile-industry-data/
